@@ -64,7 +64,11 @@ class CommentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = Comment.find(params[:id])
+      if params[:id]!=nil
+        @comment = Comment.find(params[:id])
+      elsif params[:post_id]!=nil
+        @comment = Comment.find_by_post_id(params[:post_id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
